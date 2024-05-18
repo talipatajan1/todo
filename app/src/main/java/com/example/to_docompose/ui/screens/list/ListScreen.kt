@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.SnackbarResult
@@ -113,7 +114,8 @@ fun DisplaySnackBar(
         if (action != Action.NO_ACTION) {
             val snackBarResult = snackBarHostState.showSnackbar(
                 message = setMessage(action = action, taskTitle = taskTitle),
-                actionLabel = setActionLabel(action = action)
+                actionLabel = setActionLabel(action = action),
+                duration = SnackbarDuration.Short
             )
             if (snackBarResult == SnackbarResult.ActionPerformed
                 && action == Action.DELETE

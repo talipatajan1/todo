@@ -20,15 +20,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.DismissDirection
-import androidx.compose.material3.DismissValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.SwipeToDismiss
+import androidx.compose.material3.SwipeToDismissBox
+import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDismissState
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -157,10 +156,11 @@ fun DisplayTasks(
                 task.id
             }
         ) { task ->
-            val dismissState = rememberDismissState()
+            val dismissState = rememberSwipeToDismissBoxState()
             val dismissDirection = dismissState.dismissDirection
-            val isDismissed = dismissState.isDismissed(DismissDirection.EndToStart)
-            if (isDismissed && dismissDirection == DismissDirection.EndToStart) {
+            val isDismissed = dismissState.dismissDirection == SwipeToDismissBoxValue.EndToStart
+                && dismissState.progress == 1f
+            if (isDismissed && dismissDirection == SwipeToDismissBoxValue.EndToStart) {
                 val scope = rememberCoroutineScope()
                 SideEffect {
                     scope.launch {
@@ -171,7 +171,7 @@ fun DisplayTasks(
             }
 
             val degrees by animateFloatAsState(
-                if (dismissState.targetValue == DismissValue.Default) 0f else -45f,
+                if (dismissState.progress in 0f..0.5f) 0f else -45f,
                 label = "Degree animation"
             )
 
@@ -193,18 +193,16 @@ fun DisplayTasks(
                     )
                 )
             ) {
-                SwipeToDismiss(
+                SwipeToDismissBox(
                     state = dismissState,
-                    directions = setOf(DismissDirection.EndToStart),
 //                    dismissThresholds = { FractionalThreshold(fraction = 0.2f) },
-                    background = { RedBackground(degrees = degrees) },
-                    dismissContent = {
-                        TaskItem(
-                            toDoTask = task,
-                            navigateToTaskScreen = navigateToTaskScreen
-                        )
-                    }
-                )
+                    backgroundContent = { RedBackground(degrees = degrees) }
+                ) {
+                    TaskItem(
+                        toDoTask = task,
+                        navigateToTaskScreen = navigateToTaskScreen
+                    )
+                }
             }
         }
     }

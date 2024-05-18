@@ -184,6 +184,7 @@ class SharedViewModel @Inject constructor(
         when (action) {
             Action.ADD -> {
                 addTask()
+                updateAction(Action.NO_ACTION)
             }
             Action.UPDATE -> {
                 updateTask()
