@@ -1,11 +1,7 @@
 package com.example.to_docompose.ui.screens.list
 
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -180,19 +176,19 @@ fun DisplayTasks(
                 itemAppeared = true
             }
 
-            AnimatedVisibility(
-                visible = itemAppeared && !isDismissed,
-                enter = expandVertically(
-                    animationSpec = tween(
-                        durationMillis = 300
-                    )
-                ),
-                exit = shrinkVertically(
-                    animationSpec = tween(
-                        durationMillis = 300
-                    )
-                )
-            ) {
+//            AnimatedVisibility(
+//                visible = itemAppeared && !isDismissed,
+//                enter = expandVertically(
+//                    animationSpec = tween(
+//                        durationMillis = 300
+//                    )
+//                ),
+//                exit = shrinkVertically(
+//                    animationSpec = tween(
+//                        durationMillis = 300
+//                    )
+//                )
+//            ) {
                 SwipeToDismissBox(
                     state = dismissState,
 //                    dismissThresholds = { FractionalThreshold(fraction = 0.2f) },
@@ -203,7 +199,7 @@ fun DisplayTasks(
                         navigateToTaskScreen = navigateToTaskScreen
                     )
                 }
-            }
+//            }
         }
     }
 }
