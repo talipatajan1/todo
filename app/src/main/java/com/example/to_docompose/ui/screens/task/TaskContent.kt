@@ -2,7 +2,7 @@ package com.example.to_docompose.ui.screens.task
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -40,7 +40,7 @@ fun TaskContent(
             textStyle = MaterialTheme.typography.bodyMedium,
             singleLine = true
         )
-        Divider(
+        HorizontalDivider(
             modifier = Modifier.height(MEDIUM_PADDING),
             color = MaterialTheme.colorScheme.background
         )

@@ -7,25 +7,19 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
+import androidx.navigation.toRoute
+import com.example.to_docompose.navigation.Screen
 import com.example.to_docompose.ui.screens.task.TaskScreen
 import com.example.to_docompose.ui.viewmodels.SharedViewModel
 import com.example.to_docompose.util.Action
-import com.example.to_docompose.util.Constants.TASK_ARGUMENT_KEY
-import com.example.to_docompose.util.Constants.TASK_SCREEN
 
 @ExperimentalAnimationApi
 fun NavGraphBuilder.taskComposable(
     sharedViewModel: SharedViewModel,
     navigateToListScreen: (Action) -> Unit
 ) {
-    composable(
-        route = TASK_SCREEN,
-        arguments = listOf(navArgument(TASK_ARGUMENT_KEY) {
-            type = NavType.IntType
-        }),
+    composable<Screen.Task>(
         enterTransition = {
             slideInHorizontally(
                 initialOffsetX = { fullWidth -> -fullWidth },
@@ -35,7 +29,7 @@ fun NavGraphBuilder.taskComposable(
             )
         }
     ) { navBackStackEntry ->
-        val taskId = navBackStackEntry.arguments!!.getInt(TASK_ARGUMENT_KEY)
+        val taskId = navBackStackEntry.toRoute<Screen.Task>().id
         LaunchedEffect(key1 = taskId) {
             sharedViewModel.getSelectedTask(taskId = taskId)
         }

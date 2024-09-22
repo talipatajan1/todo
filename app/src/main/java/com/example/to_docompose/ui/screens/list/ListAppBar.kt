@@ -216,7 +216,6 @@ fun DeleteAllAction(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchAppBar(
     text: String,

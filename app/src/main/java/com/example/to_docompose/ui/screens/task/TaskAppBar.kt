@@ -1,7 +1,7 @@
 package com.example.to_docompose.ui.screens.task
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
@@ -71,7 +71,7 @@ fun BackAction(
 ) {
     IconButton(onClick = { onBackClicked(Action.NO_ACTION) }) {
         Icon(
-            imageVector = Icons.Filled.ArrowBack,
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = stringResource(id = R.string.back_arrow),
             tint = MaterialTheme.colorScheme.onPrimary
         )

@@ -1,6 +1,6 @@
 # Add project specific ProGuard rules here.
 # You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
+# proguardFiles setting in build.gradle.kts.
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
@@ -19,3 +19,27 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-keepattributes Annotation, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt
+-dontnote kotlinx.serialization.SerializationKt
+
+# Keep Serializers
+
+-keep,includedescriptorclasses class com.example.to_docompose.**$$serializer { *; }
+-keepclassmembers class com.example.to_docompose.** {
+    *** Companion;
+}
+-keepclasseswithmembers class com.example.to_docompose.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# When kotlinx.serialization.json.JsonObjectSerializer occurs
+
+-keepclassmembers class kotlinx.serialization.json.** {
+    *** Companion;
+}
+-keepclasseswithmembers class kotlinx.serialization.json.** {
+    kotlinx.serialization.KSerializer serializer(...);
+}
