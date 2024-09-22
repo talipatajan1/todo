@@ -27,7 +27,7 @@ fun SetupNavigation(
         taskComposable(
             navigateToListScreen = { action ->
                 navController.navigate(Screen.List(action = action)) {
-                    popUpTo(Screen.Task) { inclusive = true }
+                    popUpTo(Screen.List()) { inclusive = true }
                 }
             },
             sharedViewModel = sharedViewModel
